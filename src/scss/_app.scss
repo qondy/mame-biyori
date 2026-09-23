@@ -200,13 +200,13 @@ $foods: (
   }
 }
 
-.complete-banner {
+.achieve-banner {
   margin-top: $spacing-md;
   text-align: center;
   font-size: $font-size-sm;
   font-weight: 700;
   color: #5c4700;
-  background: rgba($color-complete, 0.25);
+  background: rgba($color-achieve, 0.25);
   border-radius: $radius-md;
   padding: $spacing-sm $spacing-md;
 }
@@ -261,7 +261,7 @@ $foods: (
     color: #d4ac0d;
 
     path {
-      fill: $color-complete;
+      fill: $color-achieve;
     }
   }
 }
@@ -322,8 +322,8 @@ $foods: (
     cursor: default;
   }
 
-  &.is-complete {
-    background: rgba($color-complete, 0.3);
+  &.is-achieved {
+    background: rgba($color-achieve, 0.3);
   }
 
   &.is-today {
@@ -370,11 +370,11 @@ $foods: (
     gap: 6px;
   }
 
-  &__complete {
+  &__achieved {
     width: 14px;
     height: 14px;
     border-radius: 4px;
-    background: rgba($color-complete, 0.3);
+    background: rgba($color-achieve, 0.3);
   }
 }
 
@@ -484,7 +484,7 @@ $foods: (
   }
 
   &__item:first-child &__rank {
-    background: $color-complete;
+    background: $color-achieve;
   }
 
   &__name {

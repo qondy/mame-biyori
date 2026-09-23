@@ -13,7 +13,7 @@ import {
   createRecipe, deleteRecipe, setFavorite,
 } from './store';
 import {
-  countsOn, isComplete, proteinOf, streak, summarizeMonth, totalOf,
+  countsOn, isAchieved, proteinOf, streak, summarizeMonth,
 } from './stats';
 import { DayLog, FoodKey, Recipe } from './types';
 
@@ -33,9 +33,9 @@ const btnLogout = $<HTMLButtonElement>('btn-logout');
 const todayDateEl = $('today-date');
 const streakNumEl = $('streak-num');
 const foodTilesEl = $('food-tiles');
-const completeBanner = $('complete-banner');
+const achieveBanner = $('achieve-banner');
 const todayProteinEl = $('today-protein');
-const completeStreakEl = $('complete-streak');
+const monthAchievedEl = $('month-achieved');
 
 const pickCard = $('pick-card');
 
@@ -46,8 +46,8 @@ const btnPrevMonth = $<HTMLButtonElement>('btn-prev-month');
 const btnNextMonth = $<HTMLButtonElement>('btn-next-month');
 
 const summaryTitle = $('summary-title');
-const sumActive = $('sum-active');
-const sumComplete = $('sum-complete');
+const sumAchieved = $('sum-achieved');
+const sumRate = $('sum-rate');
 const sumProtein = $('sum-protein');
 const sumBars = $('sum-bars');
 const sumRanking = $('sum-ranking');
@@ -218,10 +218,10 @@ function renderToday(): void {
   const today = todayKey();
   const counts = countsOn(state.days, today);
   todayDateEl.textContent = labelOf(today);
-  streakNumEl.textContent = String(streak(state.days, today, (c) => totalOf(c) > 0));
-  completeStreakEl.textContent = String(streak(state.days, today, isComplete));
+  streakNumEl.textContent = String(streak(state.days, today, isAchieved));
+  monthAchievedEl.textContent = String(summarizeMonth(state.days, today.slice(0, 7)).achievedDays);
   todayProteinEl.textContent = proteinOf(counts).toFixed(1);
-  completeBanner.classList.toggle('hidden', !isComplete(counts));
+  achieveBanner.classList.toggle('hidden', !isAchieved(counts));
 
   foodTilesEl.replaceChildren(...FOODS.map((f) => {
     const n = counts[f.key];
@@ -314,7 +314,7 @@ function renderCalendar(): void {
     const cell = document.createElement('button');
     cell.type = 'button';
     cell.className = 'cal-cell';
-    if (isComplete(counts)) cell.classList.add('is-complete');
+    if (isAchieved(counts)) cell.classList.add('is-achieved');
     if (key === today) cell.classList.add('is-today');
     cell.disabled = key > today;
     cell.setAttribute('aria-label', `${labelOf(key)} ${FOODS.map((f) => `${f.label}${counts[f.key]}回`).join('、')}`);
@@ -340,7 +340,7 @@ function renderLegend(): void {
   });
   const comp = document.createElement('span');
   comp.className = 'legend__item';
-  comp.append(textEl('span', 'legend__complete', ''), document.createTextNode('コンプリート'));
+  comp.append(textEl('span', 'legend__achieved', ''), document.createTextNode('達成'));
   calendarLegend.replaceChildren(...items, comp);
 }
 
@@ -399,7 +399,7 @@ function renderDayModal(): void {
     logSection.append(ul);
   }
 
-  const meta = textEl('p', 'day-meta', `たんぱく質の目安 ${proteinOf(counts).toFixed(1)} g${isComplete(counts) ? '　・　コンプリート！' : ''}`);
+  const meta = textEl('p', 'day-meta', `たんぱく質の目安 ${proteinOf(counts).toFixed(1)} g${isAchieved(counts) ? '　・　達成！' : ''}`);
   dayModalBody.replaceChildren(...rows, meta, logSection);
 }
 
@@ -412,8 +412,10 @@ function renderSummary(): void {
   const cur = new Date();
   const isThisMonth = y === cur.getFullYear() && m === cur.getMonth();
   summaryTitle.textContent = isThisMonth ? '今月のまとめ' : `${y}年${m + 1}月のまとめ`;
-  sumActive.textContent = String(s.activeDays);
-  sumComplete.textContent = String(s.completeDays);
+  // 達成率の分母: 今月は今日まで、過去の月はその月の日数
+  const elapsed = isThisMonth ? cur.getDate() : daysInMonth(y, m);
+  sumAchieved.textContent = String(s.achievedDays);
+  sumRate.textContent = `${Math.round((s.achievedDays / elapsed) * 100)}%`;
   sumProtein.textContent = String(Math.round(s.protein));
 
   const max = Math.max(1, ...FOOD_KEYS.map((k) => s.counts[k]));
