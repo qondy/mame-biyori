@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まめ日和 — 機能紹介</title>
+<meta name="description" content="納豆・豆腐・枝豆を毎日おいしく続けるためのアプリ。ワンタップ記録、連続日数、カレンダー、飽きないアレンジ帳で大豆習慣をサポートします。">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="まめ日和 — 機能紹介">
+<meta property="og:image" content="__APP_URL__/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c1: #2ecc71;
+    --c2: #27ae60;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: #1a1a1a;
+    color: #ececec;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+  .topbar {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 24px 20px 0;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #9a9a9a;
+    transition: color .15s ease;
+  }
+  .back-link:hover { color: #fff; }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--c1);
+    margin: 24px 20px 0;
+    border-radius: 24px;
+    padding: 64px 24px;
+    text-align: center;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0.07;
+    filter: blur(10px);
+  }
+  .hero::before { width: 240px; height: 240px; top: -80px; left: -60px; }
+  .hero::after { width: 300px; height: 300px; bottom: -120px; right: -80px; }
+  .badge {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c1);
+    box-shadow: 0 0 0 14px rgba(255,255,255,0.14);
+  }
+  .category-pill {
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    position: relative;
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 800;
+    color: #fff;
+  }
+  .hero p.tagline {
+    position: relative;
+    margin: 0 auto 32px;
+    max-width: 520px;
+    font-size: 17px;
+    color: rgba(255,255,255,0.88);
+  }
+  .cta {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 36px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: transform .15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); }
+
+  .features {
+    max-width: 880px;
+    margin: 56px auto 0;
+    padding: 0 20px;
+  }
+  .features h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    color: #fff;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .feature-card {
+    background: #1c2620;
+    border: 1px solid #2c3d33;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .feature-icon {
+    color: var(--c1);
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .feature-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #fff;
+  }
+  .feature-desc {
+    font-size: 14px;
+    color: #b4c4ba;
+    margin: 0;
+  }
+
+  .steps {
+    max-width: 880px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+  }
+  .steps h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: #fff;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-top: 1px solid #26342b;
+  }
+  .step:first-of-type { border-top: 0; }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--c1);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step p { margin: 0; font-size: 14px; color: #cfdcd4; }
+  .step strong { color: #fff; }
+
+  .note {
+    max-width: 880px;
+    margin: 24px auto 0;
+    padding: 0 20px;
+    font-size: 13px;
+    color: #8a9a90;
+  }
+
+  .footer-cta {
+    max-width: 880px;
+    margin: 56px auto 0;
+    padding: 0 20px 64px;
+    text-align: center;
+  }
+  .footer-cta .cta {
+    background: var(--c1);
+    color: #fff;
+    box-shadow: none;
+  }
+  .footer-links {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #8a9a90;
+  }
+  .footer-links a { color: #9a9a9a; }
+  .footer-links a:hover { color: #fff; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="back-link" href="https://apps.yuji-nakamura.com/">← アプリ一覧に戻る</a>
+  </div>
+
+  <section class="hero">
+    <span class="category-pill">健康</span>
+    <div class="badge"><svg width="72" height="72" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-18 32 32)"><path d="M9 33 A9 9 0 0 1 24 26.3 A9 9 0 0 1 36 26.3 A9 9 0 0 1 51 33 A9 9 0 0 1 36 39.7 A9 9 0 0 1 24 39.7 A9 9 0 0 1 9 33 Z"/><path d="M51 33 Q56 29 56 23"/><circle cx="18" cy="33" r="2.6" fill="currentColor" stroke="none"/><circle cx="30" cy="33" r="2.6" fill="currentColor" stroke="none"/><circle cx="42" cy="33" r="2.6" fill="currentColor" stroke="none"/></g></svg></div>
+    <h1>まめ日和</h1>
+    <p class="tagline">体にいいとわかっていても、毎日だと飽きてしまう。納豆・豆腐・枝豆を「記録」と「アレンジ」で、おいしく楽しく続けるためのアプリです。</p>
+    <a class="cta" href="__APP_URL__">アプリを使ってみる →</a>
+  </section>
+
+  <section class="features">
+    <h2>できること</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><path d="M32 22 V42"/><path d="M22 32 H42"/></svg></div>
+        <h3 class="feature-title">ワンタップで記録</h3>
+        <p class="feature-desc">「納豆」「豆腐」「枝豆」を食べたらボタンを押すだけ。1日に何回でも記録でき、間違えてもすぐ取り消せます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="14" width="44" height="40" rx="5"/><path d="M10 26 H54"/><path d="M22 8 V18"/><path d="M42 8 V18"/></svg></div>
+        <h3 class="feature-title">連続日数とカレンダー</h3>
+        <p class="feature-desc">何日続いているかがひと目でわかります。3品目そろった日は「大豆コンプリート」としてカレンダーに色が付きます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 16 Q22 10 10 12 V50 Q22 48 32 54 Q42 48 54 50 V12 Q42 10 32 16 Z"/><path d="M32 16 V54"/></svg></div>
+        <h3 class="feature-title">飽きないアレンジ帳</h3>
+        <p class="feature-desc">キムチ納豆、豆腐ステーキ、ペペロンチーノ枝豆など24のアレンジを収録。今日のおすすめは日替わりで、自分のアレンジも追加できます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="30" height="30" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 52 V12"/><path d="M12 52 H54"/><rect x="20" y="34" width="7" height="18"/><rect x="32" y="24" width="7" height="28"/><rect x="44" y="30" width="7" height="22"/></svg></div>
+        <h3 class="feature-title">月のまとめとたんぱく質の目安</h3>
+        <p class="feature-desc">品目ごとの回数、コンプリート日数、たんぱく質のおおよその量、よく食べたアレンジのランキングを月ごとに振り返れます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps">
+    <h2>使い方</h2>
+    <div class="step">
+      <span class="step-num">1</span>
+      <p><strong>Googleでログイン</strong>：記録はあなた専用の領域に保存され、スマホとPCで同じデータを見られます。</p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <p><strong>食べたらタップ</strong>：今日のまめカードで、食べた品目のボタンを押します。</p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <p><strong>アレンジで飽き対策</strong>：マンネリを感じたら「今日のおすすめ」やアレンジ帳から新しい食べ方を選び、「食べた」で記録します。</p>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <p><strong>カレンダーで振り返る</strong>：連続日数やコンプリート日を見ながら、無理なく続けましょう。過去の日付もタップして修正できます。</p>
+    </div>
+  </section>
+
+  <p class="note">※ たんぱく質量は日本食品標準成分表の値をもとにした1回分の目安（納豆1パック45g・豆腐1食150g・枝豆1皿さや付き100g）で、実際の量とは異なります。医療・栄養指導の代わりにはなりません。</p>
+
+  <section class="footer-cta">
+    <a class="cta" href="__APP_URL__">今すぐ使ってみる →</a>
+    <p class="footer-links"><a href="https://apps.yuji-nakamura.com/">他のアプリも見る</a></p>
+  </section>
+</body>
+</html>

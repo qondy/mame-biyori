@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#2ecc71"/>
+  <g transform="translate(600 240) scale(3.6) translate(-32 -32)" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-18 32 32)"><path d="M9 33 A9 9 0 0 1 24 26.3 A9 9 0 0 1 36 26.3 A9 9 0 0 1 51 33 A9 9 0 0 1 36 39.7 A9 9 0 0 1 24 39.7 A9 9 0 0 1 9 33 Z"/><path d="M51 33 Q56 29 56 23"/><circle cx="18" cy="33" r="2.6" fill="#ffffff" stroke="none"/><circle cx="30" cy="33" r="2.6" fill="#ffffff" stroke="none"/><circle cx="42" cy="33" r="2.6" fill="#ffffff" stroke="none"/></g></g>
+  <text x="600" y="480" font-size="76" font-weight="600" text-anchor="middle" fill="#ffffff" font-family="-apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif" letter-spacing="-2">まめ日和</text>
+</svg>
