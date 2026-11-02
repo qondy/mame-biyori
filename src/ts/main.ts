@@ -16,6 +16,9 @@ import {
   countsOn, isAchieved, proteinOf, streak, summarizeMonth,
 } from './stats';
 import { DayLog, FoodKey, Recipe } from './types';
+import { initClickTracking } from './analytics';
+
+initClickTracking();
 
 // ============================================================
 // DOM refs
